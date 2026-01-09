@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback QR Code - Snap Fitness Gresham</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+        }
+        h1 {
+            color: #2563eb;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        #qrcode {
+            display: inline-block;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .instructions {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        .instructions h3 {
+            color: #1e293b;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .instructions ol {
+            color: #475569;
+            line-height: 1.8;
+            margin: 0;
+            padding-left: 20px;
+        }
+        .download-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .download-btn:hover {
+            background: #1d4ed8;
+        }
+        .url {
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #475569;
+            margin-top: 20px;
+            word-break: break-all;
+        }
+        .print-section {
+            page-break-inside: avoid;
+            margin: 40px 0;
+        }
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .download-btn {
+                display: none;
+            }
+        }
+        .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">💬</div>
+        <h1>Anonymous Feedback</h1>
+        <p class="subtitle">Snap Fitness Gresham</p>
+        
+        <div id="qrcode"></div>
+        
+        <p style="color: #64748b; font-size: 18px; margin: 20px 0;">
+            <strong>Scan to share your feedback</strong><br>
+            100% Anonymous • Your voice matters
+        </p>
+
+        <div class="url">
+            https://snapfitrepairs.github.io/feedback/
+        </div>
+
+        <button class="download-btn" onclick="downloadQR()">Download QR Code</button>
+        <button class="download-btn" onclick="window.print()" style="background: #059669;">Print This Page</button>
+
+        <div class="instructions">
+            <h3>📍 Where to Place This QR Code:</h3>
+            <ol>
+                <li><strong>Front Desk</strong> - Most visible spot</li>
+                <li><strong>Locker Rooms</strong> - Private, people are honest here</li>
+                <li><strong>Near Equipment</strong> - Easy to scan during workout</li>
+                <li><strong>Bathroom Stalls</strong> - People have their phones out</li>
+                <li><strong>Water Fountain Area</strong> - High traffic spot</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Generate QR Code
+        const qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: "https://snapfitrepairs.github.io/feedback/",
+            width: 256,
+            height: 256,
+            colorDark: "#1e293b",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        function downloadQR() {
+            const canvas = document.querySelector('#qrcode canvas');
+            const url = canvas.toDataURL("image/png");
+            const link = document.createElement('a');
+            link.download = 'snap-fitness-feedback-qr.png';
+            link.href = url;
+            link.click();
+        }
+    </script>
+</body>
+</html>
